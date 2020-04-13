@@ -45,7 +45,7 @@
             "description": "It still works.",
             "picture": "/img/record-player.jpg",
             "priceUsd": "65 USD",
-            "categories": ["music", "vintage"]
+            "categories": ["vintage"]
         },
         {
             "id": "LS4PSXUNUM",

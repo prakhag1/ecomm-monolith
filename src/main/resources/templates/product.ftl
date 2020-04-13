@@ -42,6 +42,7 @@
                 <#if recommend??>
                 <#include "recommendations.ftl">
                 </#if>
+                <#include "ads.ftl">
             </div>
         </div>
     </main>

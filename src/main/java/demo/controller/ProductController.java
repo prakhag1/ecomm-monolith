@@ -5,23 +5,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import demo.model.Product;
+import demo.service.AdsService;
 import demo.service.ProductService;
+import demo.service.RecommendationService;
 
 @Controller
-public class ProductController {	
+public class ProductController {
 
-	@Autowired
-	private ProductService productService;
-	
-	@RequestMapping("/product/{id}")
-	public String getProductById(@PathVariable String id, Model model, final RedirectAttributes redirectAttributes) throws Exception {
-		
-		// Product to be passed to as ModelAttribute to the next controller
-		Product prod = productService.findProductById(id).get();
-		redirectAttributes.addFlashAttribute("product", prod);
-		return "redirect:/showdetails/"+id;
-	}
+  @Autowired private ProductService productService;
+  @Autowired private RecommendationService recommendationService;
+  @Autowired private AdsService adsService;
+
+  @RequestMapping("/product/{id}")
+  public String getProductById(@PathVariable String id, Model model) throws Exception {
+
+    Product prod = productService.findProductById(id).get();
+
+    model.addAttribute("prod", prod);
+    model.addAttribute("recommend", recommendationService.getrecommendedProducts((Product) prod));
+    model.addAttribute("ad", adsService.getrecommendedAd((Product) prod));
+
+    return "product";
+  }
 }
