@@ -26,27 +26,11 @@ spec:
       labels:
         service: web
     spec:
-      volumes:
-      - name: cloudsql-proxy-claim0
-        secret:
-          secretName: cloudsql-proxy-claim0
       containers:
-      - name: cloudsql-proxy
-        args:
-        - /cloud_sql_proxy
-        - -instances=vital-octagon-109612:us-central1:test-instance=tcp:3306
-        - -credential_file=/secrets/cloudsql/credentials.json
-        image: gcr.io/cloudsql-docker/gce-proxy:1.16
-        ports:
-        - containerPort: 3306
-        volumeMounts:
-        - mountPath: /secrets/cloudsql
-          name: cloudsql-proxy-claim0
-          readOnly: true
       - name: hipster
         env:
         - name: DB_HOST
-          value: 127.0.0.1:3306
+          value: [DB_IP]:3306
         - name: DB_PASSWORD
           valueFrom: 
             secretKeyRef:
@@ -57,6 +41,6 @@ spec:
             secretKeyRef:
               name: dbsecret
               key: username
-        image: gcr.io/vital-octagon-109612/hipster
+        image: gcr.io/[PROJECT_ID]/hipster
         ports:
         - containerPort: 8080
