@@ -4,10 +4,10 @@ set -eo pipefail
 export PROJECT=$(gcloud config get-value project)
 export REGION="us-central1"
 export ZONE="us-central1-a"
-export CLUSTER="test-cluster"
+export CLUSTER="test-cluster-monolith"
 export DB="ecommerce"
 export DB_INSTANCE="test-instance-monolith"
-export NETWORK="test-network"
+export NETWORK="test-network-monolith"
 
 bold=$(tput bold)
 normal=$(tput sgr0)
