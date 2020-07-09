@@ -3,7 +3,8 @@ kind: Service
 metadata:
   labels:
     service: web
-  name: hipster
+  name: ecomm
+  namespace: monolith
 spec:
   ports:
   - name: "80"
@@ -18,7 +19,8 @@ kind: Deployment
 metadata:
   labels:
     service: web
-  name: hipster
+  name: ecomm
+  namespace: monolith
 spec:
   replicas: 1
   template:
@@ -27,10 +29,10 @@ spec:
         service: web
     spec:
       containers:
-      - name: hipster
+      - name: ecomm
         env:
         - name: DB_HOST
-          value: [DB_IP]:3306
+          value:  [DB_IP]:3306
         - name: DB_PASSWORD
           valueFrom: 
             secretKeyRef:
@@ -41,6 +43,6 @@ spec:
             secretKeyRef:
               name: dbsecret
               key: username
-        image: gcr.io/[PROJECT_ID]/hipster
+        image: gcr.io/cloud-solutions-images/ecomm
         ports:
         - containerPort: 8080

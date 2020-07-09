@@ -7,12 +7,12 @@
 		>
             <div class="container">
                 <h1 class="jumbotron-heading">
-                    One-stop for Hipster Fashion &amp; Style Online
+                    One-stop for Fashion &amp; Style Online
                 </h1>
                 <p class="lead text-muted">
                     Tired of mainstream fashion ideas, popular trends and
                     societal norms? This line of lifestyle products will help
-                    you catch up with the hipster trend and express your
+                    you catch up with the trend and express your
                     personal style. Start shopping hip and vintage items now!
                 </p>
             </div>

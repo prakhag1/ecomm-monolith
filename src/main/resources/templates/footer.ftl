@@ -1,10 +1,7 @@
     <footer class="py-5 px-5">
         <div class="container">
             <p>
-                &copy; 2018 Google Inc
-                <span class="text-muted">
-                    <a href="https://github.com/GoogleCloudPlatform/microservices-demo/">(Source Code)</a>
-                </span>
+                &copy; 2020 Google Inc
             </p>
             <p>
                 <small class="text-muted">
