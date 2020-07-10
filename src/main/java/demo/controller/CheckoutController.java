@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import demo.model.Cart;
 import demo.service.CartService;
 import demo.service.OrderService;
+import demo.service.PaymentService;
 
 @Controller
 public class CheckoutController {
@@ -21,6 +22,8 @@ public class CheckoutController {
 	private OrderService orderService;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private PaymentService paymentService;
 		
 	/**
 	 * Checkout calls OrderService downstream which persists cart and cart items in a database
@@ -32,9 +35,12 @@ public class CheckoutController {
 	 * @return
 	 */
 	@RequestMapping(value = "/cart/checkout", method = RequestMethod.POST)
-	public String checkout(Model model) {
+	public String checkout(Model model) throws Exception {
 		
 		Cart cart = cartService.getCart();		
+		// Process payment
+		paymentService.makePayment();
+		// Save order
 		String orderId = orderService.addCustomerOrder(cart);
 		cart = cartService.emptyCart();
 		session.setAttribute("cart", cart);
