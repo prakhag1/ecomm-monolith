@@ -44,5 +44,6 @@ spec:
               name: dbsecret
               key: username
         image: gcr.io/cloud-solutions-images/ecomm
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
