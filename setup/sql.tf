@@ -1,6 +1,4 @@
 resource "google_compute_global_address" "private_ip_address" {
-  provider = google-beta
-
   name          = "private-ip-address"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
@@ -9,16 +7,12 @@ resource "google_compute_global_address" "private_ip_address" {
 }
 
 resource "google_service_networking_connection" "private_vpc_connection" {
-  provider = google-beta
-
   network                 = google_compute_network.vpc.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
 }
 
 resource "google_sql_database_instance" "instance" {
-  provider = google-beta
-
   name   = "${var.project_id}-mysql"
   region = "us-central1"
 
@@ -43,11 +37,6 @@ resource "google_sql_user" "users" {
   host     = "%"
   instance = google_sql_database_instance.instance.name
   password = "password"
-}
-
-provider "google-beta" {
-  region = "us-central1"
-  zone   = "us-central1-a"
 }
 
 output "sql_database_name" {
